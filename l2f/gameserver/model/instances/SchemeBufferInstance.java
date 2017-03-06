@@ -286,7 +286,7 @@ public class SchemeBufferInstance extends NpcInstance
 		// Synerge - Block time that the player cannot use the community buffer
 		else if (player.getResurrectionBuffBlockedTime() > System.currentTimeMillis())
 		{
-			msg = showText(player, "Info", "You must wait 10 seconds after being resurrected to use the buffer!", false, "Return", "main");
+			msg = showText(player, "Info", "Прошло менее 10 секунд от времени последней смерти, подождите!", false, "Return", "main");
 		}
 
 		if (msg == null)
@@ -305,7 +305,7 @@ public class SchemeBufferInstance extends NpcInstance
 		StringBuilder mainBuilder = new StringBuilder();
 		StringBuilder builder = new StringBuilder();
 
-		mainBuilder.append("<html><head><title>").append(TITLE_NAME).append("</title></head><body><br><center><font name=\"hs12\" color=ae9977>Target to Buff</font>");
+		mainBuilder.append("<html><head><title>").append(TITLE_NAME).append("</title></head><body><br><center><font name=\"hs12\" color=ae9977>Цель бафа</font>");
 
 		int td = 0;
 		String[] TRS =
@@ -319,17 +319,17 @@ public class SchemeBufferInstance extends NpcInstance
 		final String bottonA, bottonB, bottonC;
 		if (isPetBuff(player))
 		{
-			bottonA = "Auto Buff Pet";
-			bottonB = "Heal My Pet";
-			bottonC = "Remove Pet Buffs";
-			mainBuilder.append("<button value=\"Buffing Pet\" action=\"bypass _bbsbufferbypass_buffpet 0 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Fight3None_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Fight3None\">");
+			bottonA = "Авто Баф питомца";
+			bottonB = "Выхилить питомца";
+			bottonC = "Удалить бафы с питомца";
+			mainBuilder.append("<button value=\"Бафать питомца\" action=\"bypass _bbsbufferbypass_buffpet 0 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Fight3None_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Fight3None\">");
 		}
 		else
 		{
-			bottonA = "Auto Buff";
-			bottonB = "Heal";
-			bottonC = "Remove Buffs";
-			mainBuilder.append("<button value=\"Buffing Player\" action=\"bypass _bbsbufferbypass_buffpet 1 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Apply_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Apply\">");
+			bottonA = "Авто Баф";
+			bottonB = "Выхилить";
+			bottonC = "Удалить бафы";
+			mainBuilder.append("<button value=\"Бафать Игрока\" action=\"bypass _bbsbufferbypass_buffpet 1 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Apply_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Apply\">");
 		}
 
 		if (ENABLE_BUFF_SECTION)
@@ -340,7 +340,7 @@ public class SchemeBufferInstance extends NpcInstance
 				{
 					td = 0;
 				}
-				builder.append(TRS[td]).append("<button value=\"Buffs\" action=\"bypass _bbsbufferbypass_redirect view_buffs 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm\">").append(TRS[td + 1]);
+				builder.append(TRS[td]).append("<button value=\"Бафы\" action=\"bypass _bbsbufferbypass_redirect view_buffs 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm\">").append(TRS[td + 1]);
 				td += 2;
 			}
 			if (ENABLE_RESIST)
@@ -349,7 +349,7 @@ public class SchemeBufferInstance extends NpcInstance
 				{
 					td = 0;
 				}
-				builder.append(TRS[td]).append("<button value=\"Resist\" action=\"bypass _bbsbufferbypass_redirect view_resists 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm\">").append(TRS[td + 1]);
+				builder.append(TRS[td]).append("<button value=\"Резисты\" action=\"bypass _bbsbufferbypass_redirect view_resists 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm\">").append(TRS[td + 1]);
 				td += 2;
 			}
 			if (ENABLE_SONGS)
@@ -358,7 +358,7 @@ public class SchemeBufferInstance extends NpcInstance
 				{
 					td = 0;
 				}
-				builder.append(TRS[td]).append("<button value=\"Songs\" action=\"bypass _bbsbufferbypass_redirect view_songs 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm\">").append(TRS[td + 1]);
+				builder.append(TRS[td]).append("<button value=\"Песни\" action=\"bypass _bbsbufferbypass_redirect view_songs 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm\">").append(TRS[td + 1]);
 				td += 2;
 			}
 			if (ENABLE_DANCES)
@@ -367,7 +367,7 @@ public class SchemeBufferInstance extends NpcInstance
 				{
 					td = 0;
 				}
-				builder.append(TRS[td]).append("<button value=\"Dances\" action=\"bypass _bbsbufferbypass_redirect view_dances 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm\">").append(TRS[td + 1]);
+				builder.append(TRS[td]).append("<button value=\"Танцы\" action=\"bypass _bbsbufferbypass_redirect view_dances 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm\">").append(TRS[td + 1]);
 				td += 2;
 			}
 			if (ENABLE_CHANTS)
@@ -376,7 +376,7 @@ public class SchemeBufferInstance extends NpcInstance
 				{
 					td = 0;
 				}
-				builder.append(TRS[td]).append("<button value=\"Chants\" action=\"bypass _bbsbufferbypass_redirect view_chants 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm\">").append(TRS[td + 1]);
+				builder.append(TRS[td]).append("<button value=\"Чанты\" action=\"bypass _bbsbufferbypass_redirect view_chants 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm\">").append(TRS[td + 1]);
 				td += 2;
 			}
 			if (ENABLE_SPECIAL)
@@ -385,7 +385,7 @@ public class SchemeBufferInstance extends NpcInstance
 				{
 					td = 0;
 				}
-				builder.append(TRS[td]).append("<button value=\"Special\" action=\"bypass _bbsbufferbypass_redirect view_special 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm\">").append(TRS[td + 1]);
+				builder.append(TRS[td]).append("<button value=\"Специальные\" action=\"bypass _bbsbufferbypass_redirect view_special 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm\">").append(TRS[td + 1]);
 				td += 2;
 			}
 			if (ENABLE_OTHERS)
@@ -394,7 +394,7 @@ public class SchemeBufferInstance extends NpcInstance
 				{
 					td = 0;
 				}
-				builder.append(TRS[td]).append("<button value=\"Others\" action=\"bypass _bbsbufferbypass_redirect view_others 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm\">").append(TRS[td + 1]);
+				builder.append(TRS[td]).append("<button value=\"Другие\" action=\"bypass _bbsbufferbypass_redirect view_others 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm\">").append(TRS[td + 1]);
 				td += 2;
 			}
 		}
@@ -405,13 +405,13 @@ public class SchemeBufferInstance extends NpcInstance
 			{
 				td = 0;
 			}
-			builder.append(TRS[td]).append("<button value=\"Cubics\" action=\"bypass _bbsbufferbypass_redirect view_cubic 0 0\" width=130 height=25 back=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm\">").append(TRS[td + 1]);
+			builder.append(TRS[td]).append("<button value=\"Кубики\" action=\"bypass _bbsbufferbypass_redirect view_cubic 0 0\" width=130 height=25 back=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_HeroConfirm\">").append(TRS[td + 1]);
 			td += 2;
 		}
 
 		if (builder.length() > 0)
 		{
-			mainBuilder.append("<BR1><br><font name=\"hs12\" color=ae9977>Single Buffs</font><BR1><table cellspacing=0 cellpadding=0>").append(builder.toString()).append("</table>");
+			mainBuilder.append("<BR1><br><font name=\"hs12\" color=ae9977>Одиночные баффы</font><BR1><table cellspacing=0 cellpadding=0>").append(builder.toString()).append("</table>");
 			builder = new StringBuilder();
 			td = 0;
 		}
@@ -448,7 +448,7 @@ public class SchemeBufferInstance extends NpcInstance
 
 		if (builder.length() > 0)
 		{
-			mainBuilder.append("<BR1><br><font name=\"hs12\" color=ae9977>Ready Options</font><BR1><table " +
+			mainBuilder.append("<BR1><br><font name=\"hs12\" color=ae9977>Опции</font><BR1><table " +
 					"cellspacing=0 cellpadding=0>").append(builder.toString()).append("</table>");
 		}
 
@@ -459,7 +459,7 @@ public class SchemeBufferInstance extends NpcInstance
 
 		if (player.isGM())
 		{
-			mainBuilder.append("<br><button value=\"GM Manage Buffs\" action=\"bypass _bbsbufferbypass_redirect manage_buffs 0 0\" width=130 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+			mainBuilder.append("<br><button value=\"GM Панель\" action=\"bypass _bbsbufferbypass_redirect manage_buffs 0 0\" width=130 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
 		}
 		mainBuilder.append("</center></html>");
 		return mainBuilder.toString();
@@ -481,7 +481,7 @@ public class SchemeBufferInstance extends NpcInstance
 
 		if (action.equals("add"))
 		{
-			builder.append("<font name=\"hs12\" color=ae9977>You can add <font color=LEVEL name=\"hs12\">").append(MAX_SCHEME_BUFFS - BUFF_COUNT).append("</font> Buffs and <font color=LEVEL name=\"hs12\">").append(MAX_SCHEME_DANCES - DANCE_SONG).append("</font> Dances more!</font>");
+			builder.append("<font name=\"hs12\" color=ae9977>Вы можете добавить <font color=LEVEL name=\"hs12\">").append(MAX_SCHEME_BUFFS - BUFF_COUNT).append("</font> Бафов и <font color=LEVEL name=\"hs12\">").append(MAX_SCHEME_DANCES - DANCE_SONG).append("</font> Танцев/Песен!</font>");
 
 			for (SingleBuff singleBuff : allSingleBuffs)
 			{
@@ -586,7 +586,7 @@ public class SchemeBufferInstance extends NpcInstance
 				k += 1;
 			}
 		}
-		builder.append("<br><br><button value=\"Back\" action=\"bypass _bbsbufferbypass_manage_scheme_select ").append(scheme).append(" x x\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Back_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Back\"><button value=\"Home\" action=\"bypass _bbsbufferbypass_redirect main 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Back_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Back\"></center>");
+		builder.append("<br><br><button value=\"Back\" action=\"bypass _bbsbufferbypass_manage_scheme_select ").append(scheme).append(" x x\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Back_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Back\"><button value=\"Домой\" action=\"bypass _bbsbufferbypass_redirect main 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Back_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Back\"></center>");
 		return builder.toString();
 	} // viewAllSchemeBuffs
 
@@ -845,13 +845,13 @@ public class SchemeBufferInstance extends NpcInstance
 		builder.append("<html><head><title>").append(TITLE_NAME).append("</title></head><body><br><center><img src=\"L2UI_CH3.herotower_deco\" width=256 height=32><br><font name=\"hs12\" color=ae9977>There are <font color=LEVEL name=\"hs12\">").append(bcount).append("</font> buffs in current scheme!</font><br><br>");
 		if (bcount < (MAX_SCHEME_BUFFS + MAX_SCHEME_DANCES))
 		{
-			builder.append("<button value=\"Add buffs\" action=\"bypass _bbsbufferbypass_manage_scheme_1 ").append(schemeId).append(" 1 x\" width=200 height=20 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+			builder.append("<button value=\"Добавить бафы\" action=\"bypass _bbsbufferbypass_manage_scheme_1 ").append(schemeId).append(" 1 x\" width=200 height=20 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
 		}
 		if (bcount > 0)
 		{
-			builder.append("<button value=\"Remove buffs\" action=\"bypass _bbsbufferbypass_manage_scheme_2 ").append(schemeId).append(" 1 x\" width=200 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+			builder.append("<button value=\"Удалить бафы\" action=\"bypass _bbsbufferbypass_manage_scheme_2 ").append(schemeId).append(" 1 x\" width=200 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
 		}
-		builder.append("<br><button value=\"Back\" action=\"bypass _bbsbufferbypass_edit_1 0 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Back_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Back\"><button value=\"Home\" action=\"bypass _bbsbufferbypass_redirect main 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Back_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Back\"></center>");
+		builder.append("<br><button value=\"Назад\" action=\"bypass _bbsbufferbypass_edit_1 0 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Back_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Back\"><button value=\"Домой\" action=\"bypass _bbsbufferbypass_redirect main 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Back_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Back\"></center>");
 		return builder.toString();
 	}
 
@@ -862,47 +862,47 @@ public class SchemeBufferInstance extends NpcInstance
 		builder.append("<font color=LEVEL>[Buff management]</font><br>");
 		if (ENABLE_BUFFS)
 		{
-			builder.append("<button value=\"Buffs\" action=\"bypass _bbsbufferbypass_edit_buff_list buff Buffs 1\" width=200 height=22 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+			builder.append("<button value=\"Бафы\" action=\"bypass _bbsbufferbypass_edit_buff_list buff Buffs 1\" width=200 height=22 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
 		}
 		if (ENABLE_RESIST)
 		{
-			builder.append("<button value=\"Resist Buffs\" action=\"bypass _bbsbufferbypass_edit_buff_list resist Resists 1\" width=200 height=22 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+			builder.append("<button value=\"Резисты\" action=\"bypass _bbsbufferbypass_edit_buff_list resist Resists 1\" width=200 height=22 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
 		}
 		if (ENABLE_SONGS)
 		{
-			builder.append("<button value=\"Songs\" action=\"bypass _bbsbufferbypass_edit_buff_list song Songs 1\" width=200 height=22 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+			builder.append("<button value=\"Песни\" action=\"bypass _bbsbufferbypass_edit_buff_list song Songs 1\" width=200 height=22 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
 		}
 		if (ENABLE_DANCES)
 		{
-			builder.append("<button value=\"Dances\" action=\"bypass _bbsbufferbypass_edit_buff_list dance Dances 1\" width=200 height=22 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+			builder.append("<button value=\"Танцы\" action=\"bypass _bbsbufferbypass_edit_buff_list dance Dances 1\" width=200 height=22 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
 		}
 		if (ENABLE_CHANTS)
 		{
-			builder.append("<button value=\"Chants\" action=\"bypass _bbsbufferbypass_edit_buff_list chant Chants 1\" width=200 height=22 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+			builder.append("<button value=\"Чанты\" action=\"bypass _bbsbufferbypass_edit_buff_list chant Chants 1\" width=200 height=22 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
 		}
 		if (ENABLE_SPECIAL)
 		{
-			builder.append("<button value=\"Special Buffs\" action=\"bypass _bbsbufferbypass_edit_buff_list special Special_Buffs 1\" width=200 height=22 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+			builder.append("<button value=\"Специальные\" action=\"bypass _bbsbufferbypass_edit_buff_list special Special_Buffs 1\" width=200 height=22 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
 		}
 		if (ENABLE_OTHERS)
 		{
-			builder.append("<button value=\"Others Buffs\" action=\"bypass _bbsbufferbypass_edit_buff_list others Others_Buffs 1\" width=200 height=22 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+			builder.append("<button value=\"Другие\" action=\"bypass _bbsbufferbypass_edit_buff_list others Others_Buffs 1\" width=200 height=22 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
 		}
 		if (ENABLE_CUBIC)
 		{
-			builder.append("<button value=\"Cubics\" action=\"bypass _bbsbufferbypass_edit_buff_list cubic cubic_Buffs 1\" width=200 height=22 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+			builder.append("<button value=\"Кубики\" action=\"bypass _bbsbufferbypass_edit_buff_list cubic cubic_Buffs 1\" width=200 height=22 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
 		}
 		if (ENABLE_BUFF_SET)
 		{
-			builder.append("<button value=\"Buff Sets\" action=\"bypass _bbsbufferbypass_edit_buff_list set Buff_Sets 1\" width=200 height=22 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"><br>");
+			builder.append("<button value=\"Бафф сеты\" action=\"bypass _bbsbufferbypass_edit_buff_list set Buff_Sets 1\" width=200 height=22 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"><br>");
 		}
-		builder.append("<button value=\"Back\" action=\"bypass _bbsbufferbypass_redirect main 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Back_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Back\"></center>");
+		builder.append("<button value=\"Назад\" action=\"bypass _bbsbufferbypass_redirect main 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Back_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Back\"></center>");
 		return builder.toString();
 	}
 
 	private static String createScheme()
 	{
-		return "<html><head><title>" + TITLE_NAME + "</title></head><body><br><center><img src=\"L2UI_CH3.herotower_deco\" width=256 height=32><br><br><font name=\"hs12\" color=ae9977>You MUST separate new words with a dot (.)<br><br>Scheme name: <edit var=\"name\" width=100><br><br><button value=\"Create Scheme\" action=\"bypass _bbsbufferbypass_create $name no_name x x\" width=200 height=30 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"><br><button value=\"Back\" action=\"bypass _bbsbufferbypass_redirect main 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Back_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Back\"></center>";
+		return "<html><head><title>" + TITLE_NAME + "</title></head><body><br><center><img src=\"L2UI_CH3.herotower_deco\" width=256 height=32><br><br><font name=\"hs12\" color=ae9977>Разделяйте новые слова точкой (.)<br><br>Scheme name: <edit var=\"name\" width=100><br><br><button value=\"Создать схему\" action=\"bypass _bbsbufferbypass_create $name no_name x x\" width=200 height=30 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"><br><button value=\"Назад\" action=\"bypass _bbsbufferbypass_redirect main 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Back_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Back\"></center>";
 	}
 
 	private static Collection<String> generateQuery(int case1, int case2)
@@ -965,7 +965,7 @@ public class SchemeBufferInstance extends NpcInstance
 		List<PlayerScheme> playerSchemes = player.getBuffSchemes();
 		StringBuilder mainBuilder = new StringBuilder();
 
-		mainBuilder.append("<BR1><br><font name=\"hs12\" color=ae9977>Scheme Buffs</font><BR1><table cellspacing=0 cellpadding=0>");
+		mainBuilder.append("<BR1><br><font name=\"hs12\" color=ae9977>Мои схемы</font><BR1><table cellspacing=0 cellpadding=0>");
 		if (playerSchemes.size() > 0)
 		{
 			StringBuilder builder = new StringBuilder();
@@ -996,7 +996,7 @@ public class SchemeBufferInstance extends NpcInstance
 
 		if (playerSchemes.size() < SCHEMES_PER_PLAYER)
 		{
-			mainBuilder.append("<BR1><table><tr><td><button value=\"Create\" action=\"bypass _bbsbufferbypass_create_1 x x x\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Fight1None_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Fight1None\"></td>");
+			mainBuilder.append("<BR1><table><tr><td><button value=\"Создать\" action=\"bypass _bbsbufferbypass_create_1 x x x\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Fight1None_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Fight1None\"></td>");
 		}
 		else
 		{
@@ -1005,7 +1005,7 @@ public class SchemeBufferInstance extends NpcInstance
 
 		if (playerSchemes.size() > 0)
 		{
-			mainBuilder.append("<td><button value=\"Edit\" action=\"bypass _bbsbufferbypass_edit_1 x x x\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Fight3None_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Fight3None\"></td><td><button value=\"Delete\" action=\"bypass _bbsbufferbypass_delete_1 x x x\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Info_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Info\"></td></tr></table>");
+			mainBuilder.append("<td><button value=\"Изменить\" action=\"bypass _bbsbufferbypass_edit_1 x x x\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Fight3None_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Fight3None\"></td><td><button value=\"Удалить\" action=\"bypass _bbsbufferbypass_delete_1 x x x\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Info_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Info\"></td></tr></table>");
 		}
 		else
 		{
@@ -1172,7 +1172,7 @@ public class SchemeBufferInstance extends NpcInstance
 			}
 			builder.append("</table>");
 		}
-		builder.append("<br><br><button value=\"Back\" action=\"bypass _bbsbufferbypass_redirect manage_buffs 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Back_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Back\"><button value=\"Home\" action=\"bypass _bbsbufferbypass_redirect main 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Back_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Back\"></center>");
+		builder.append("<br><br><button value=\"Back\" action=\"bypass _bbsbufferbypass_redirect manage_buffs 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Back_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Back\"><button value=\"Домой\" action=\"bypass _bbsbufferbypass_redirect main 0 0\" width=200 height=30 back=\"L2UI_ct1.OlympiadWnd_DF_Back_Down\" fore=\"L2UI_ct1.OlympiadWnd_DF_Back\"></center>");
 		return builder.toString();
 	}
 
