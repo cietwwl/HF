@@ -603,7 +603,7 @@ public class EnterWorld extends L2GameClientPacket
 	{
 		Quest q = QuestManager.getQuest(255);
 		if(q != null)
-		{
+		{/*
 			if(CCPSecondaryPassword.hasPassword(player))
 			{
 				player.processQuestEvent(q.getName(), "CheckPass", null, false);
@@ -615,7 +615,7 @@ public class EnterWorld extends L2GameClientPacket
 			else
 			{
 				player.processQuestEvent(q.getName(), "UC", null, false);
-			}
+			}*/
 			player.processQuestEvent(q.getName(), "OpenClassMaster", null, false);
 			player.processQuestEvent(q.getName(), "ShowChangeLog", null, false);
 		}

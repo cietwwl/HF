@@ -42,7 +42,7 @@ public class ProtocolVersion extends L2GameClientPacket
 			catch (RuntimeException e)
 			{
 				hwidData = null;
-                                _log.info("-100");
+                                //_log.info("-100");
 			}
 		}
 	}
@@ -52,19 +52,19 @@ public class ProtocolVersion extends L2GameClientPacket
 	{
 		if (protocol == -2)
 		{
-                    _log.info("-1");
+                    //_log.info("-1");
 			_client.closeNow(false);
 			return;
 		}
 		else if (protocol == -3)
 		{
-			_log.info("Status request from IP : " + getClient().getIpAddr());
+			//_log.info("Status request from IP : " + getClient().getIpAddr());
 			getClient().close(new SendStatus());
 			return;
 		}
 		else if (protocol < Config.MIN_PROTOCOL_REVISION || protocol > Config.MAX_PROTOCOL_REVISION)
 		{
-			_log.warn("Unknown protocol revision : " + protocol + ", client : " + _client);
+			//_log.warn("Unknown protocol revision : " + protocol + ", client : " + _client);
 			getClient().close(new KeyPacket(null));
 			return;
 		}
@@ -84,7 +84,7 @@ public class ProtocolVersion extends L2GameClientPacket
 			
 			if (!isEverythingOk)
 			{
-                            _log.info("-2");
+                            //_log.info("-2");
 				_client.setSystemVersion(999);
 				getClient().setHWID("TEMP_ERROR");
                                 getClient().close(new KeyPacket(null));
@@ -92,11 +92,11 @@ public class ProtocolVersion extends L2GameClientPacket
 		}
 		else
 		{
-                    _log.info("-3");
+                    //_log.info("-3");
 			_client.setSystemVersion(Config.LATEST_SYSTEM_VER);
 			getClient().setHWID("NO-SMART-GUARD-ENABLED");
 		}
-		 _log.info("-200");
+		 //_log.info("-200");
 		sendPacket(new KeyPacket(_client.enableCrypt()));
 	}
 	
@@ -104,12 +104,12 @@ public class ProtocolVersion extends L2GameClientPacket
 	{
 		if (!(ConfigProtection.ALLOW_GUARD_SYSTEM) && _hwidHdd=="" && _hwidMac=="" &&_hwidCPU =="")
                 {
-                    _log.info("-4");
+                    //_log.info("-4");
                     return false;
                 }
 		_client.setSystemVersion(Config.LATEST_SYSTEM_VER);
 		getClient().setHWID(_hwidCPU);
-                _log.info("-5");
+                //_log.info("-5");
 		return true;
 	}
 

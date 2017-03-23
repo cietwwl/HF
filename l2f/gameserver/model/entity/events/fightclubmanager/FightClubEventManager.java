@@ -122,7 +122,7 @@ public class FightClubEventManager
 
 		roomFound.addAlonePlayer(player);
 
-		player.sendMessage("You just participated to " + event.getName() + " Event!");
+		player.sendMessage("Вы успешно зарегистрировались в ивенте: " + event.getName() + " !");
 	}
 
 	/**
@@ -208,7 +208,7 @@ public class FightClubEventManager
 		final AbstractFightClub duplicatedEvent = prepareNewEvent(event);
 		createRoom(duplicatedEvent);
 
-		sendToAllMsg(duplicatedEvent, "Registration to " + duplicatedEvent.getName() + " started!");
+		sendToAllMsg(duplicatedEvent, "Регистрация на ивент " + duplicatedEvent.getName() + " началась!");
 		sendEventInvitations(event);
 
 		ThreadPoolManager.getInstance().schedule(new Runnable(){
@@ -216,7 +216,7 @@ public class FightClubEventManager
 			public void run()
 			{
 				// After 2 minutes
-				sendToAllMsg(duplicatedEvent, duplicatedEvent.getName() + " Event will start in 3 minutes!");
+				sendToAllMsg(duplicatedEvent, duplicatedEvent.getName() + " начнется через 3 минуты!");
 				try
 				{
 					Thread.sleep(3 * 60000);
@@ -226,7 +226,7 @@ public class FightClubEventManager
 					e.printStackTrace();
 				}
 				// After 3 minutes
-				sendToAllMsg(duplicatedEvent, duplicatedEvent.getName() + " Event will start in 1 minute!");
+				sendToAllMsg(duplicatedEvent, duplicatedEvent.getName() + " начнется через 1 минуту!");
 				notifyConditions(duplicatedEvent);
 				try
 				{
@@ -237,7 +237,7 @@ public class FightClubEventManager
 					e.printStackTrace();
 				}
 				// After 45 seconds
-				sendToAllMsg(duplicatedEvent, duplicatedEvent.getName() + " Event will start in 15 seconds!");
+				sendToAllMsg(duplicatedEvent, duplicatedEvent.getName() + " начнется через 15 секунд!");
 				notifyConditions(duplicatedEvent);
 				try
 				{
@@ -248,7 +248,7 @@ public class FightClubEventManager
 					e.printStackTrace();
 				}
 				// After 15 seconds
-				sendToAllMsg(duplicatedEvent, duplicatedEvent.getName() + " Event Started!");
+				sendToAllMsg(duplicatedEvent, duplicatedEvent.getName() + " Начался!");
 
 				if(!Config.ALLOW_FIGHT_CLUB || Config.FIGHT_CLUB_DISALLOW_EVENT == duplicatedEvent.getEventId())// Protection for my mistakes
 					return;
@@ -360,7 +360,7 @@ public class FightClubEventManager
 		for(Player player : GameObjectsStorage.getAllPlayersForIterate())
 			if(canPlayerParticipate(player, false, true) && (player.getEvent(AbstractFightClub.class) == null))
 			{
-				player.ask(new ConfirmDlg(SystemMsg.S1, 60000).addString("Would you like to join " + event.getName() + " event?"), new AnswerEventInvitation(player, event));
+				player.ask(new ConfirmDlg(SystemMsg.S1, 60000).addString("Желаете принять участие в ивенте " + event.getName() + " ?"), new AnswerEventInvitation(player, event));
 			}
 	}
 
@@ -413,7 +413,7 @@ public class FightClubEventManager
 	 */
 	private void sendErrorMessageToPlayer(Player player, String msg)
 	{
-		player.sendPacket(new Say2(player.getObjectId(), ChatType.COMMANDCHANNEL_ALL, "Error", msg));
+		player.sendPacket(new Say2(player.getObjectId(), ChatType.COMMANDCHANNEL_ALL, "Упс", msg));
 		player.sendMessage(msg);
 	}
 
@@ -606,41 +606,41 @@ public class FightClubEventManager
 
 		if(player.getClassId().level() != 3)
 		{
-			sendErrorMessageToPlayer(player, "Your class is too weak for the Fight Club!");
+			sendErrorMessageToPlayer(player, "Получите 3 профессию и сможете учавствовать в ивенте!");
 			return false;
 		}
 
 		if(player.isBlocked())
 		{
-			sendErrorMessageToPlayer(player, "Blocked players cannot join Fight Club!");
+			sendErrorMessageToPlayer(player, "Вы заблокированы. Регистрация в ивенте не возможна!");
 			return false;
 		}
 
 		if(player.getCursedWeaponEquippedId() > 0)
 		{
 			if(sendMessage)
-				sendErrorMessageToPlayer(player, "Cursed Weapon owners may not participate in Fight Club!");
+				sendErrorMessageToPlayer(player, "Вы держите проклятое оружие, Регистрация в ивенте не возможна!");
 			return false;
 		}
 
 		if(Olympiad.isRegistered(player))
 		{
 			if(sendMessage)
-				sendErrorMessageToPlayer(player, "Players registered to Olympiad Match may not participate in Fight Club!");
+				sendErrorMessageToPlayer(player, "Вы зарегистрированы на олимпиаду, Регистрация в ивенте не возможна!");
 			return false;
 		}
 
 		if(player.isInOlympiadMode() || player.getOlympiadGame() != null)
 		{
 			if(sendMessage)
-				sendErrorMessageToPlayer(player, "Players fighting in Olympiad Match may not participate in Fight Club!");
+				sendErrorMessageToPlayer(player, "Вы сражаетесь на олимпиаде, Регистрация в ивенте не возможна!");
 			return false;
 		}
 
 		if(player.isInObserverMode())
 		{
 			if(sendMessage)
-				sendErrorMessageToPlayer(player, "Players in Observation mode may not participate in Fight Club!");
+				sendErrorMessageToPlayer(player, "Вы в режиме наблюдателя, Регистрация в ивенте не возможна!");
 			return false;
 		}
 
@@ -649,56 +649,56 @@ public class FightClubEventManager
 			if(player.isDead() || player.isAlikeDead())
 			{
 				if(sendMessage)
-					sendErrorMessageToPlayer(player, "Dead players may not participate in Fight Club!");
+					sendErrorMessageToPlayer(player, "Вы мертвы, Регистрация в ивенте не возможна!");
 				return false;
 			}
 
 			if(player.isBlocked())
 			{
 				if(sendMessage)
-					sendErrorMessageToPlayer(player, "Blocked players may not participate in Fight Club!");
+					sendErrorMessageToPlayer(player, "Вы заблокированы, Регистрация в ивенте не возможна!");
 				return false;
 			}
 
 			if(!player.isInPeaceZone() && player.getPvpFlag() > 0)
 			{
 				if(sendMessage)
-					sendErrorMessageToPlayer(player, "Players in PvP Battle may not participate in Fight Club!");
+					sendErrorMessageToPlayer(player, "Вы находитесь в PvP, Регистрация в ивенте не возможна!");
 				return false;
 			}
 
 			if(player.isInCombat())
 			{
 				if(sendMessage)
-					sendErrorMessageToPlayer(player, "Players in Combat may not participate in Fight Club Battle!");
+					sendErrorMessageToPlayer(player, "Вы в бою, Регистрация в ивенте не возможна!");
 				return false;
 			}
 
 			if(player.getEvent(DuelEvent.class) != null)
 			{
 				if(sendMessage)
-					sendErrorMessageToPlayer(player, "Players engaged in Duel may not participate in Fight Club Battle!");
+					sendErrorMessageToPlayer(player, "Вы в дуэли, Регистрация в ивенте не возможна!");
 				return false;
 			}
 
 			if(player.getKarma() > 0)
 			{
 				if(sendMessage)
-					sendErrorMessageToPlayer(player, "Chaotic players may not participate in Fight Club!");
+					sendErrorMessageToPlayer(player, "Вы пк, Регистрация в ивенте не возможна!");
 				return false;
 			}
 
 			if(player.isInOfflineMode())
 			{
 				if(sendMessage)
-					sendErrorMessageToPlayer(player, "Players in Offline mode may not participate in Fight Club!");
+					sendErrorMessageToPlayer(player, "Вы сидите на оффтрейде, Регистрация в ивенте не возможна!");
 				return false;
 			}
 
 			if(player.isInStoreMode())
 			{
 				if(sendMessage)
-					sendErrorMessageToPlayer(player, "Players in Store mode may not participate in Fight Club!");
+					sendErrorMessageToPlayer(player, "Вы сидите и торгуете, Регистрация в ивенте не возможна!");
 				return false;
 			}
 		}

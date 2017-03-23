@@ -210,7 +210,7 @@ public class CharacterCreate extends L2GameClientPacket
 		client.setCharSelection(CharacterSelectionInfo.loadCharacterSelectInfo(client.getLogin()));
 	}
 	
-	private static final String[] ALLOWED_LETTERS = {"1","2","3","4","5","6","7","8","9","0","q","w","e","r","t","y","u","i","o","p","a","s","d","f","g","h","j","k","l","z","x","c","v","b","n","m"};
+	private static final String[] ALLOWED_LETTERS = {"1","2","3","4","5","6","7","8","9","0","q","w","e","r","t","y","u","i","o","p","a","s","d","f","g","h","j","k","l","z","x","c","v","b","n","m","а","б","в","г","д","е","ё","ж","з","и","й","к","л","м","н","о","п","р","с","т","у","ф","х","ц","ч","ш","щ","ъ","ы","ь","э","ю","я"};
 	
 	public static boolean checkName(String name)
 	{

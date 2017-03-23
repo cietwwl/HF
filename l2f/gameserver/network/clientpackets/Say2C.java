@@ -101,7 +101,7 @@ public class Say2C extends L2GameClientPacket
 
 		if (activeChar.getLevel() <= Config.CHATS_REQUIRED_LEVEL && activeChar.getSubClasses().size() <= 1/* && (_type != ChatType.PETITION_PLAYER && _type != ChatType.PETITION_GM)*/)
 		{
-			activeChar.sendMessage("This Chat is allowed only for characters with level higher than " + Config.CHATS_REQUIRED_LEVEL + " to avoid spam.");
+			activeChar.sendMessage("Чат доступен только для персонажей, у которых уровень выше " + Config.CHATS_REQUIRED_LEVEL + ". Это необходимо для предотвращения спама.");
 			activeChar.sendActionFailed();
 			return;
 		}

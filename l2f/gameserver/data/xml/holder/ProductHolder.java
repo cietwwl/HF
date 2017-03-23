@@ -129,7 +129,7 @@ public class ProductHolder
 
 	private static long getMillisecondsFromString(String datetime)
 	{
-		DateFormat df = new SimpleDateFormat("dd.MM.yyyy HH:mm"); 
+		DateFormat df = new SimpleDateFormat("dd.MM.yyyy HH:mm",Locale.ENGLISH); 
 		try
 		{ 
 			Date time = df.parse(datetime);
