@@ -243,4 +243,23 @@ public class CCPSmallCommands
 		activeChar.sendMessage(levelsToRemove + " levels were decreased!");
 		return true;
 	}
+        
+        public static boolean addLevel(Player activeChar)
+	{
+
+		if (activeChar.getLevel()>=85)
+		{
+			activeChar.sendMessage("Level to decrease cannot be bigger than " + (activeChar.getLevel() - 1));
+			return false;
+		}
+
+		int newLevel = activeChar.getLevel()+1;
+		long expToAdd = Experience.LEVEL[newLevel] - activeChar.getExp();
+                
+		activeChar.getActiveClass().addExp(expToAdd);
+		activeChar.levelSet(newLevel);
+		activeChar.updateStats();
+		activeChar.sendMessage("Level UP!");
+		return true;
+	}
 }
