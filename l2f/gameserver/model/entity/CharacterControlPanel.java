@@ -13,6 +13,8 @@ import l2f.gameserver.model.entity.CCPHelpers.CCPPoll;
 import l2f.gameserver.model.entity.CCPHelpers.CCPRepair;
 import l2f.gameserver.model.entity.CCPHelpers.CCPSecondaryPassword;
 import l2f.gameserver.model.entity.CCPHelpers.CCPSmallCommands;
+import l2f.gameserver.model.entity.events.impl.DuelEvent;
+import l2f.gameserver.model.entity.olympiad.Olympiad;
 import l2f.gameserver.model.quest.Quest;
 import l2f.gameserver.model.quest.QuestState;
 
@@ -226,10 +228,133 @@ public class CharacterControlPanel
 
 			return "cfgDelevel.htm";
 		}
+                //OBT
+                else if (param[0].equals("cbt.level"))
+		{
+			if(checkCBT(activeChar))
+                            CCPSmallCommands.addLevel(activeChar);
 
+			return "default/53000.htm";
+		}
+                else if (param[0].equals("cbt.adena"))
+		{
+			
+                    if( activeChar.getInventory().getAdena()<2000000000&&checkCBT(activeChar))
+                    {
+                        activeChar.getInventory().addAdena(1000000000,"OBT");
+                    }
+                    return "default/53000.htm";
+		}
+                else if (param[0].equals("cbt.noble"))
+		{
+                        if(!activeChar.isNoble()&&checkCBT(activeChar))
+                        {
+                            activeChar.setNoble(true);
+                        }
+			return "default/53000.htm";
+		}
+                else if (param[0].equals("cbt.hero"))
+		{
+                        if(!activeChar.isHero()&&checkCBT(activeChar))
+                        {
+                            activeChar.setHero(activeChar);
+                        }
+			return "default/53000.htm";
+		}
 		return "char.htm";
 	}
+        private boolean checkCBT(Player player)
+        {
+                        if(player.isDead() || player.isAlikeDead())
+			{
+				//if(sendMessage)
+				//	sendErrorMessageToPlayer(player, "Вы мертвы, Регистрация в ивенте не возможна!");
+				return false;
+			}
 
+			if(player.isBlocked())
+			{
+				//if(sendMessage)
+				//	sendErrorMessageToPlayer(player, "Вы заблокированы, Регистрация в ивенте не возможна!");
+				return false;
+			}
+
+			if(!player.isInPeaceZone() && player.getPvpFlag() > 0)
+			{
+				//if(sendMessage)
+				//	sendErrorMessageToPlayer(player, "Вы находитесь в PvP, Регистрация в ивенте не возможна!");
+				return false;
+			}
+
+			if(player.isInCombat())
+			{
+				//if(sendMessage)
+				//	sendErrorMessageToPlayer(player, "Вы в бою, Регистрация в ивенте не возможна!");
+				return false;
+			}
+
+			if(player.getEvent(DuelEvent.class) != null)
+			{
+				//if(sendMessage)
+				//	sendErrorMessageToPlayer(player, "Вы в дуэли, Регистрация в ивенте не возможна!");
+				return false;
+			}
+
+			if(player.getKarma() > 0)
+			{
+				//if(sendMessage)
+				//	sendErrorMessageToPlayer(player, "Вы пк, Регистрация в ивенте не возможна!");
+				return false;
+			}
+
+			if(player.isInOfflineMode())
+			{
+				//if(sendMessage)
+				//	sendErrorMessageToPlayer(player, "Вы сидите на оффтрейде, Регистрация в ивенте не возможна!");
+				return false;
+			}
+
+			if(player.isInStoreMode())
+			{
+				//if(sendMessage)
+				//	sendErrorMessageToPlayer(player, "Вы сидите и торгуете, Регистрация в ивенте не возможна!");
+				return false;
+			}
+                        if(player.isBlocked())
+		{
+			//sendErrorMessageToPlayer(player, "Вы заблокированы. Регистрация в ивенте не возможна!");
+			return false;
+		}
+
+		if(player.getCursedWeaponEquippedId() > 0)
+		{
+			//if(sendMessage)
+			//	sendErrorMessageToPlayer(player, "Вы держите проклятое оружие, Регистрация в ивенте не возможна!");
+			return false;
+		}
+
+		if(Olympiad.isRegistered(player))
+		{
+			//if(sendMessage)
+			//	sendErrorMessageToPlayer(player, "Вы зарегистрированы на олимпиаду, Регистрация в ивенте не возможна!");
+			return false;
+		}
+
+		if(player.isInOlympiadMode() || player.getOlympiadGame() != null)
+		{
+			//if(sendMessage)
+			//	sendErrorMessageToPlayer(player, "Вы сражаетесь на олимпиаде, Регистрация в ивенте не возможна!");
+			return false;
+		}
+
+		if(player.isInObserverMode())
+		{
+			//if(sendMessage)
+			//	sendErrorMessageToPlayer(player, "Вы в режиме наблюдателя, Регистрация в ивенте не возможна!");
+			return false;
+		}
+                        return true;
+        }
 	public String replacePage(String currentPage, Player activeChar, String additionalText, String bypass)
 	{
 		currentPage = currentPage.replaceFirst("%online%", CCPSmallCommands.showOnlineCount());
