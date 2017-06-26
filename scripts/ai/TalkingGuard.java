@@ -25,10 +25,10 @@ public class TalkingGuard extends Guard
 	// Фразы, которые может произнести гвард, когда начинает атаковать пк
 	private static final String[] _sayAggroText =
 	{
-		"{name}, Do not go away, now I'm going to kill you a little bit!",
-		"{name}, I'll slaughter, mother swear!",
-		"La-la-la, I'm crazy. Who will kill all!",
-		"How I killed as cut as I ruined the people! be you, {name}, one more in the list!",
+		"{name}, даже не смей уходить гаденыш, я убью тебя!",
+		"{name}, Я готов убивать, motherfucker!",
+		"Ла ла ла, я сошел с ума, я тот, кто тебя прикончит!",
+		"Я убил стольких, что тебя убить будет проще простого! Ты следующий, {name}, тебе конец!",
 		"I'm terrified of flying on the wings of the night! I'm chewing gum sticking to your base! I. .. In short, {name}, Now I'm going to kill you!",
 		"I fear, trembling in the night! I dodgy lock the basement of justice! I have a favorite good luck! I am a Black Guard!",
 		"Wow, my future victim. This is me talking to you, {name}! Do not pretend that you're not in the business!",

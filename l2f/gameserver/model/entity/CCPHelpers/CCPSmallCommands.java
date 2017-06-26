@@ -249,7 +249,7 @@ public class CCPSmallCommands
 
 		if (activeChar.getLevel()>=85)
 		{
-			activeChar.sendMessage("Level to decrease cannot be bigger than " + (activeChar.getLevel() - 1));
+			activeChar.sendMessage("Level to UP cannot be bigger than " + (activeChar.getLevel()));
 			return false;
 		}
 

@@ -353,6 +353,12 @@ public class CharacterControlPanel
 			//	sendErrorMessageToPlayer(player, "Вы в режиме наблюдателя, Регистрация в ивенте не возможна!");
 			return false;
 		}
+                if(player.isInCombat())
+		{
+			//if(sendMessage)
+			//	sendErrorMessageToPlayer(player, "Вы в режиме наблюдателя, Регистрация в ивенте не возможна!");
+			return false;
+		}
                         return true;
         }
 	public String replacePage(String currentPage, Player activeChar, String additionalText, String bypass)
