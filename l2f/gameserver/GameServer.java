@@ -84,6 +84,8 @@ import l2f.gameserver.taskmanager.tasks.RestoreOfflineTraders;
 import l2f.gameserver.utils.Strings;
 import l2f.gameserver.vote.VoteMain;
 import net.sf.ehcache.CacheManager;
+import scripts.services.site.Reward;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -185,6 +187,7 @@ public class GameServer
 		World.init();
 		Parsers.parseAll();
 		HWIDBan.LoadAllHWID();
+                Reward.getInstance();
 		ItemsDAO.getInstance();
 		CrestCache.getInstance();
 		ImagesCache.getInstance();
