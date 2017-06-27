@@ -1,10 +1,13 @@
 package l2f.gameserver.model.entity;
 
 import java.util.StringTokenizer;
+import java.util.concurrent.Future;
+import l2f.commons.threading.RunnableImpl;
 
 import l2f.gameserver.Config;
 import l2f.gameserver.instancemanager.QuestManager;
 import l2f.gameserver.model.Player;
+import l2f.gameserver.model.actor.instances.player.Bonus;
 import l2f.gameserver.model.entity.CCPHelpers.CCPCWHPrivilages;
 import l2f.gameserver.model.entity.CCPHelpers.CCPOffline;
 import l2f.gameserver.model.entity.CCPHelpers.CCPPassword;
@@ -17,13 +20,17 @@ import l2f.gameserver.model.entity.events.impl.DuelEvent;
 import l2f.gameserver.model.entity.olympiad.Olympiad;
 import l2f.gameserver.model.quest.Quest;
 import l2f.gameserver.model.quest.QuestState;
+import l2f.gameserver.network.loginservercon.AuthServerCommunication;
+import l2f.gameserver.network.loginservercon.gspackets.BonusRequest;
+import l2f.gameserver.network.serverpackets.ExBR_PremiumState;
+import l2f.gameserver.network.serverpackets.components.SystemMsg;
 
 import org.apache.commons.lang3.StringUtils;
 
 public class CharacterControlPanel
 {
 	private static CharacterControlPanel _instance;
-
+        protected Future<?> _notifyThread = null;
 	public String useCommand(Player activeChar, String text, String bypass)
 	{
 		// While some1 is currently writing secondary password
@@ -231,7 +238,7 @@ public class CharacterControlPanel
                 //OBT
                 else if (param[0].equals("cbt.level"))
 		{
-			if(checkCBT(activeChar))
+			if(checkNormal(activeChar))
                             CCPSmallCommands.addLevel(activeChar);
 
 			return "default/53000.htm";
@@ -239,7 +246,7 @@ public class CharacterControlPanel
                 else if (param[0].equals("cbt.adena"))
 		{
 			
-                    if( activeChar.getInventory().getAdena()<2000000000&&checkCBT(activeChar))
+                    if( activeChar.getInventory().getAdena()<2000000000&&checkNormal(activeChar))
                     {
                         activeChar.getInventory().addAdena(1000000000,"OBT");
                     }
@@ -247,7 +254,7 @@ public class CharacterControlPanel
 		}
                 else if (param[0].equals("cbt.noble"))
 		{
-                        if(!activeChar.isNoble()&&checkCBT(activeChar))
+                        if(!activeChar.isNoble()&&checkNormal(activeChar))
                         {
                             activeChar.setNoble(true);
                         }
@@ -255,15 +262,85 @@ public class CharacterControlPanel
 		}
                 else if (param[0].equals("cbt.hero"))
 		{
-                        if(!activeChar.isHero()&&checkCBT(activeChar))
+                        if(!activeChar.isHero()&&checkNormal(activeChar))
                         {
                             activeChar.setHero(activeChar);
                         }
 			return "default/53000.htm";
 		}
+                else if (param[0].equals("donate.info"))
+		{
+                        if(!activeChar.isHero()&&checkNormal(activeChar))
+                        {
+                            return "default/60001.htm";
+                        }
+			return "default/60000.htm";
+		}
+                else if (param[0].equals("donate.services"))
+		{
+                        if(!activeChar.isHero()&&checkNormal(activeChar))
+                        {
+                            return "default/60002.htm";
+                        }
+			return "default/60000.htm";
+		}
+                else if(param[0].equals("donate.premium"))
+                {
+                    if (param.length > 1)
+                    {
+			if(setPremium(activeChar,param[1]))
+                        {
+                            return "default/60020.htm";
+                        }
+                        else
+                        {
+                            return "default/60020_ERROR.htm";
+                        }
+                    }
+                    else
+                    {
+                        return "default/60020.htm";
+                    }
+                    
+                }
 		return "char.htm";
 	}
-        private boolean checkCBT(Player player)
+        private boolean setPremium(Player player, String param)
+        {
+            try
+            {
+                Integer days = Integer.valueOf(param);
+                if (!player.getInventory().destroyItemByItemId(4037, days <=1 ? 15 : days <=3 ? 29 : days<=7 ? 50 : days==30 ? 99 : 1000000, "RateBonus"))
+		{
+			player.sendPacket(SystemMsg.INCORRECT_ITEM_COUNT);
+			return false;
+		}
+                else
+                {
+                    int bonusExpire = (int) (System.currentTimeMillis() / 1000L) + days * 24 * 60 * 60;
+                    switch (Config.SERVICES_RATE_TYPE)
+                    {
+			case Bonus.BONUS_GLOBAL_ON_AUTHSERVER:
+				AuthServerCommunication.getInstance().sendPacket(new BonusRequest(player.getAccountName(), days, bonusExpire));
+				break;
+                    }
+                    
+                    player.getNetConnection().setBonus(days);
+                    player.getNetConnection().setBonusExpire(bonusExpire);
+                    player.stopBonusTask();
+                    player.startBonusTask();
+                    if (player.getParty() != null)
+			player.getParty().recalculatePartyData();
+                    player.sendPacket(new ExBR_PremiumState(player, true));
+                    return true;
+                }
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+        }
+        private boolean checkNormal(Player player)
         {
                         if(player.isDead() || player.isAlikeDead())
 			{
