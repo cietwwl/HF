@@ -20,7 +20,6 @@ public class Obt extends Functions implements IVoicedCommandHandler
         String dialog = HtmCache.getInstance().getNotNull(html, activeChar);
     
         show(dialog, activeChar);
-        activeChar.sendPacket(new ExBR_ProductList());
         return true;
     }
   
