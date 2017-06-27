@@ -1,5 +1,6 @@
 package l2f.gameserver.handler.voicecommands.impl;
 
+import l2f.gameserver.data.htm.HtmCache;
 import l2f.gameserver.handler.voicecommands.IVoicedCommandHandler;
 import l2f.gameserver.model.Player;
 import l2f.gameserver.network.serverpackets.ExBR_ProductList;
@@ -14,7 +15,11 @@ public class Donate extends Functions implements IVoicedCommandHandler
     @Override
     public boolean useVoicedCommand(String command, Player activeChar, String args)
     {
-        activeChar.sendPacket(new ExBR_ProductList());
+        String html = "donate/60000.htm";
+    
+        String dialog = HtmCache.getInstance().getNotNull(html, activeChar);
+    
+        show(dialog, activeChar);
         return true;
     }
   
