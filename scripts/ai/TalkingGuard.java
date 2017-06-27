@@ -26,58 +26,58 @@ public class TalkingGuard extends Guard
 	private static final String[] _sayAggroText =
 	{
 		"{name}, даже не смей уходить гаденыш, я убью тебя!",
-		"{name}, Я готов убивать, motherfucker!",
-		"Ла ла ла, я сошел с ума, я тот, кто тебя прикончит!",
-		"Я убил стольких, что тебя убить будет проще простого! Ты следующий, {name}, тебе конец!",
-		"I'm terrified of flying on the wings of the night! I'm chewing gum sticking to your base! I. .. In short, {name}, Now I'm going to kill you!",
-		"I fear, trembling in the night! I dodgy lock the basement of justice! I have a favorite good luck! I am a Black Guard!",
-		"Wow, my future victim. This is me talking to you, {name}! Do not pretend that you're not in the business!",
-		"Hooray! For their country, for all my brethren! Prepare to die, {name}!",
-		"{name}, stand and deliver?",
-		"{name}, just die, not to complicate my life!",
-		"{name}, how do you like to die? Quickly and easily, or slowly and painfully?",
-		"{name}, pvp or pissed?",
-		"{name}, I'll kill you softly.",
-		"{name}, I'll tear as Tuzik warmer!",
-		"Prepare to die, {name}!",
-		"{name}, You fight like a girl!",
-		"{name}, pray before death! Although ... do not have time!"
+"{name}, Я готов убивать, ублюдок!",
+"{name},Ла ла ла, я сошел с ума, я тот, кто тебя прикончит!",
+"Я убил стольких, что тебя убить будет проще простого! Ты следующий, {name}, конец тебе!",
+"Я ужас, летящий на крыльях ночи! Я жвачка прилипла к вашей базе! И. .. короче, {name}, теперь я собираюсь убить тебя!",
+"{name}, Я боюсь, дрожат коленки! Я хитроумный замок от подвала правосудия! У меня есть любимая дача! Я Серый Страж! Смотрел игру престолов?",
+ "Ты, моя будущая жертва. Это я говорю тебе, {name}! Не делайте вид, что Ты не в понимаешь!",
+"Ура! За свою страну, за всех моих братьев! Готовься к смерти, {name}!",
+"{name}, стоишь и ссышь?",
+"{name}, просто умери, не усложняй свою жизнь!",
+"{name}, как вы хотели бы умереть? Быстро и легко, или медленно и мучительно?",
+"{name}, пвп или зассал?",
+"{name}, я тебя убью мягко.",
+"{name}, я порву как Тузик грелку!",
+"Готовься к смерти, {name}!",
+"{name}, ты дерешься, как бабка на базаре!",
+"{name}, молись перед смертью! Хотя ... не успеешь!"
 	};
 	// Фразы, которые может произнести гвард, адресуя их проходящим мимо игрокам мужского пола
 	private static final String[] _sayNormalTextM =
 	{
-		"{name}, cho is?",
-		"{name}, hello!",
-		"{name}, hi!",
-		"{name}, hello nasty.",
-		"{name}, Give weapon for a moment, I want to make a screen.",
-		"{name}, successful hunt.",
-		"{name}, what force, brother?",
-		"{name}, more kills you.",
-		"{name}, you give me nightmares dreamed.",
-		"{name}, I know you - you have long wanted for the murder of innocent monsters.",
-		"{name}, pvp or pissed?",
-		"{name}, you have a purse dropped.",
-		"{name}, I will not go with you on a date, do not even ask.",
-		"Smack all in this chat."
+		"{имя}, чо надо?",
+"{имя}, привет!",
+"{имя}, привет!",
+"{имя}, привет противный",
+"{имя}, дай оружие на сек, я хочу сделать скрин.",
+"{имя}, удачной охоты.",
+"{имя}, в чем сила, брат?",
+"{имя}, больше умираешь ты, чем я.",
+"{имя}, мне кошмары снились.",
+"{имя}, я знаю, тебя уже давно разыскивают за убийства невинных монстров.",
+"{имя}, пвп или зассал?",
+"{имя}, у вас кошелек упал.",
+"{имя}, я не пойду с тобой на свидание, даже не проси.",
+"Чмоки чпоки всем в этом чате"
 	};
 	// Фразы, которые может произнести гвард, адресуя их проходящим мимо игрокам женского пола
 	private static final String[] _sayNormalTextF =
 	{
-		"{name}, hello beautiful.",
-		"{name}, Wow, what are you ... e ... eyes.",
-		"{name}, do not want to hang out with a real macho?",
-		"{name}, hi!",
-		"{name}, let me touch ... e ... Well in general forbid certain things touch.",
-		"{name}, No woman is a thing - to kill enemies.",
-		"{name}, you have the upper hand broke, do not shine ... eyes.",
-		"{name}, oh what buns...",
-		"{name}, oh what legs...",
-		"{name}, yes but you babe.",
-		"{name}, wah, what a woman, I would have a.",
-		"{name}, and what are you doing tonight?",
-		"{name}, You agree that from the point of banal erudition, not every individual is able to locally-selected tendency to ignore the potential of emotions and parity allotsirovat ambivalent quanta logistics extractable given anthropomorphic heuristic genesis?",
-		"{name}, offer his hand and heart. And after the wedding purse."
+		"{имя}, привет, красавица",
+"{имя}, ух, какая ты ... э ... глаза",
+"{имя}, не хочешь потусоваться с настоящим мачо?",
+"{имя}, привет красавица!",
+"{имя}, дай мне прикоснуться к ... э ... Ну в общем запрещаю определенные вещи трогать.",
+"{имя}, не женское это дело - убивать врагов.",
+"{имя}, ногти сломала, не свети ... в глаза.",
+"{имя}, ой, какие плюшки...",
+"{имя}, ой какие ножки...",
+"{имя}, да, но ты круче, детка.",
+"{имя}, вах, какая женщина, я бы.",
+"{имя}, а что ты делаешь сегодня вечером?",
+ "{имя}, Вы согласитесь, что с точки зрения банальной эрудиции, не каждый индивидум способен игнорировать потенциальные эмоции и четко аллотсировать амбивалентные кванты логистики с учетом экстрагирования антропоморфного эвристического генезиса?",
+"{имя}, предложить бы руку и сердце. Да вот после свадьбы кошелек жалко"
 	};
 
 	public TalkingGuard(NpcInstance actor)
