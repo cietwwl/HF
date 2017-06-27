@@ -85,18 +85,6 @@ public class Reward
                                    }
                                 }
                         }
-                }
-                catch (SQLException e)
-		{
-			LOG.error("Error while SELECT Rewards on Site", e);
-		}
-		finally
-		{
-			DbUtils.closeQuietly(con, selectObjectStatement, rsetObject);
-			DbUtils.closeQuietly(con, selectL2topStatement, rsetL2top);
-			DbUtils.closeQuietly(con, insertStatement);
-		}
-                
                 if(!_rewards.isEmpty())
                 {
                     for (int rewards : _rewards.keySet())
@@ -122,6 +110,19 @@ public class Reward
                         }
                     }
                 }
+                }
+                catch (SQLException e)
+		{
+			LOG.error("Error while SELECT Rewards on Site", e);
+		}
+		finally
+		{
+			DbUtils.closeQuietly(con, selectObjectStatement, rsetObject);
+			DbUtils.closeQuietly(con, selectL2topStatement, rsetL2top);
+			DbUtils.closeQuietly(con, insertStatement);
+		}
+                
+                
             }
             catch(Exception ee)
             {
