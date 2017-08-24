@@ -235,42 +235,9 @@ public class CharacterControlPanel
 
 			return "cfgDelevel.htm";
 		}
-                //OBT
-                else if (param[0].equals("cbt.level"))
-		{
-			if(checkNormal(activeChar))
-                            CCPSmallCommands.addLevel(activeChar);
-
-			return "default/53000.htm";
-		}
-                else if (param[0].equals("cbt.adena"))
-		{
-			
-                    if( activeChar.getInventory().getAdena()<2000000000&&checkNormal(activeChar))
-                    {
-                        activeChar.getInventory().addAdena(1000000000,"OBT");
-                    }
-                    return "default/53000.htm";
-		}
-                else if (param[0].equals("cbt.noble"))
-		{
-                        if(!activeChar.isNoble()&&checkNormal(activeChar))
-                        {
-                            activeChar.setNoble(true);
-                        }
-			return "default/53000.htm";
-		}
-                else if (param[0].equals("cbt.hero"))
-		{
-                        if(!activeChar.isHero()&&checkNormal(activeChar))
-                        {
-                            activeChar.setHero(activeChar);
-                        }
-			return "default/53000.htm";
-		}
                 else if (param[0].equals("donate.info"))
 		{
-                        if(!activeChar.isHero()&&checkNormal(activeChar))
+                        if(checkNormal(activeChar))
                         {
                             return "default/60001.htm";
                         }
@@ -278,7 +245,7 @@ public class CharacterControlPanel
 		}
                 else if (param[0].equals("donate.services"))
 		{
-                        if(!activeChar.isHero()&&checkNormal(activeChar))
+                        if(checkNormal(activeChar))
                         {
                             return "default/60002.htm";
                         }
@@ -317,15 +284,15 @@ public class CharacterControlPanel
 		}
                 else
                 {
-                    int bonusExpire = (int) (System.currentTimeMillis() / 1000L) + days * 24 * 60 * 60;
+                    int bonusExpire = player.getNetConnection().getBonusExpire()<System.currentTimeMillis() / 1000L ? (int) (System.currentTimeMillis() / 1000L) + days * 24 * 60 * 60 : player.getNetConnection().getBonusExpire()+(days * 24 * 60 * 60);
                     switch (Config.SERVICES_RATE_TYPE)
                     {
 			case Bonus.BONUS_GLOBAL_ON_AUTHSERVER:
-				AuthServerCommunication.getInstance().sendPacket(new BonusRequest(player.getAccountName(), days, bonusExpire));
+				AuthServerCommunication.getInstance().sendPacket(new BonusRequest(player.getAccountName(), 2, bonusExpire));
 				break;
                     }
                     
-                    player.getNetConnection().setBonus(days);
+                    player.getNetConnection().setBonus(1);
                     player.getNetConnection().setBonusExpire(bonusExpire);
                     player.stopBonusTask();
                     player.startBonusTask();
