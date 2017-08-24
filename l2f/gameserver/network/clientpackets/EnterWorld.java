@@ -618,6 +618,10 @@ public class EnterWorld extends L2GameClientPacket
 			}*/
 			player.processQuestEvent(q.getName(), "OpenClassMaster", null, false);
 			player.processQuestEvent(q.getName(), "ShowChangeLog", null, false);
+                        String text = "Добро пожаловать на игровой сервер HighFive x75! Вперед к вершинам! Главный город - Гиран";
+			int time = 3000 + text.length() * 100;
+                        ExShowScreenMessage sm = new ExShowScreenMessage(text, time, ScreenMessageAlign.TOP_CENTER, text.length() < 64);
+                        player.sendPacket(sm);
 		}
 	}
 
