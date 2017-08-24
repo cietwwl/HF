@@ -45,7 +45,6 @@ public class VoicedCommandHandler extends AbstractHolder
 		registerVoicedCommandHandler(new Ping());
 		registerVoicedCommandHandler(new CommandSiege());
 		registerVoicedCommandHandler(new LockPc());
-                registerVoicedCommandHandler(new Obt());
                 registerVoicedCommandHandler(new Donate());
 		// Synerge
 		registerVoicedCommandHandler(new BuffStoreVoiced());
