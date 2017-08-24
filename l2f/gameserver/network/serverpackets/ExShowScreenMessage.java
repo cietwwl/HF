@@ -27,8 +27,9 @@ public class ExShowScreenMessage extends NpcStringContainer
 	//@Deprecated
 	public ExShowScreenMessage(String text, int time, ScreenMessageAlign text_align, boolean big_font)
 	{
-		this(text, time, text_align, big_font, 1, -1, false);
+		this(text, time, text_align, big_font, 1, -1, true);
 	}
+        
 
 	@Deprecated
 	public ExShowScreenMessage(String text, int time, ScreenMessageAlign text_align, boolean big_font, int type, int messageId, boolean showEffect)
